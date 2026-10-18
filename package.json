@@ -1,0 +1,17 @@
+{
+  "name": "blackout",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cover that pays out when a government cuts the internet, decided by GenLayer validators.",
+  "license": "MIT",
+  "scripts": {
+    "bundle": "python3 scripts/bundle.py",
+    "bundle:check": "python3 scripts/bundle.py --check"
+  },
+  "devDependencies": {
+    "genlayer": "0.40.0-rc.3"
+  },
+  "dependencies": {
+    "genlayer-js": "2.0.0-rc.1"
+  }
+}

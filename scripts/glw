@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# GenLayer wrapper for Studio Next: fetches a fee preset, then deploys or writes
+# with the keystore password from .env.local.
+#
+#   scripts/glw deploy contracts/foo.py [ctor args...]
+#   scripts/glw write  <address> <method> [args...]
+#   scripts/glw call   <address> <method> [args...]
+#   scripts/glw lint   contracts/foo.py
+#   scripts/glw test   [pytest args...]
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+export GENVM_VERSION="${GENVM_VERSION:-v0.6.0-rc5}"  # bundle that ships runner py-genlayer:5jycge4q…
+[ -f .env.local ] && { set -a; . ./.env.local; set +a; }
+
+fee_args() {
+  local est
+  est=$(npx genlayer estimate-fees --json 2>/dev/null | tail -1)
+  FEES=$(printf '%s' "$est" | python3 -I -c 'import json,sys; print(json.dumps({"distribution": json.load(sys.stdin)["distribution"]}))')
+  FEE_VALUE=$(printf '%s' "$est" | python3 -I -c 'import json,sys; print(json.load(sys.stdin)["feeValue"])')
+}
+
+cmd="${1:-}"; shift || true
+case "$cmd" in
+  deploy)
+    contract="$1"; shift
+    fee_args
+    if [ "$#" -gt 0 ]; then set -- --args "$@"; fi
+    printf '%s\n' "$GENLAYER_PW" | npx genlayer deploy --contract "$contract" "$@" --fees "$FEES" --fee-value "$FEE_VALUE"
+    ;;
+  write)
+    address="$1"; method="$2"; shift 2
+    fee_args
+    if [ "$#" -gt 0 ]; then set -- --args "$@"; fi
+    printf '%s\n' "$GENLAYER_PW" | npx genlayer write "$address" "$method" "$@" --fees "$FEES" --fee-value "$FEE_VALUE"
+    ;;
+  call)
+    address="$1"; method="$2"; shift 2
+    if [ "$#" -gt 0 ]; then set -- --args "$@"; fi
+    npx genlayer call "$address" "$method" "$@"
+    ;;
+  lint)
+    .venv/bin/genvm-lint check "$@" --json
+    ;;
+  test)
+    .venv/bin/pytest tests -q "$@"
+    ;;
+  *)
+    echo "usage: scripts/glw {deploy|write|call|lint|test} ..." >&2
+    exit 2
+    ;;
+esac

@@ -1,0 +1,8 @@
+# GenLayer "Studio Next" toolchain (consensus v0.6 RC, contract API v0.3).
+# Install with: uv pip install --prerelease=allow -r requirements-dev.txt
+genlayer-test[sim]==0.30.0rc2
+genlayer-py==0.19.0rc2
+genvm-linter==0.11.1rc2
+web3==8.0.0
+eth-account==0.14.0
+pytest>=9
