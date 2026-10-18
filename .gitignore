@@ -22,3 +22,5 @@ dist/
 # python packaging
 build/
 *.egg-info/
+.vercel
+*.tsbuildinfo

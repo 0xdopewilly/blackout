@@ -1,0 +1,362 @@
+{
+ "contract": "0x06366C26dD74463B343170ABA47f0dc27c223a6A",
+ "as_of": "2026-10-18T06:11:12Z",
+ "config": {
+  "baseline_percentile": 75,
+  "dark_pct": 50,
+  "demo_mode": true,
+  "entity_cap_bps": 2000,
+  "lead_s": 259200,
+  "lost_hours": 6,
+  "max_attempts": 3,
+  "outlets": 95,
+  "owner": "0xe258d2604aec1321ddd58f179001cc6a8c442930",
+  "reobserve_gap_s": 21600,
+  "settle_delay_s": 172800,
+  "total_cap_bps": 8000,
+  "version": "1",
+  "wallet_cap": 5,
+  "withdraw_notice_s": 1209600
+ },
+ "terms": [
+  {
+   "cap_days": 5,
+   "country": "Bangladesh",
+   "daily": "1000000000000000000",
+   "entity": "country/BD",
+   "history_days": 6,
+   "rate_bps": 2000,
+   "tz_min": 360
+  },
+  {
+   "cap_days": 5,
+   "country": "Ghana",
+   "daily": "1000000000000000000",
+   "entity": "country/GH",
+   "history_days": 0,
+   "rate_bps": 2000,
+   "tz_min": 0
+  },
+  {
+   "cap_days": 5,
+   "country": "Pakistan",
+   "daily": "1000000000000000000",
+   "entity": "country/PK",
+   "history_days": 0,
+   "rate_bps": 1500,
+   "tz_min": 300
+  },
+  {
+   "cap_days": 5,
+   "country": "Iran",
+   "daily": "1000000000000000000",
+   "entity": "country/IR",
+   "history_days": 0,
+   "rate_bps": 2500,
+   "tz_min": 210
+  },
+  {
+   "cap_days": 5,
+   "country": "Iraq",
+   "daily": "1000000000000000000",
+   "entity": "country/IQ",
+   "history_days": 0,
+   "rate_bps": 1500,
+   "tz_min": 180
+  },
+  {
+   "cap_days": 5,
+   "country": "Ethiopia",
+   "daily": "1000000000000000000",
+   "entity": "country/ET",
+   "history_days": 0,
+   "rate_bps": 2000,
+   "tz_min": 180
+  },
+  {
+   "cap_days": 5,
+   "country": "Myanmar",
+   "daily": "1000000000000000000",
+   "entity": "country/MM",
+   "history_days": 0,
+   "rate_bps": 2500,
+   "tz_min": 390
+  }
+ ],
+ "ledger": [
+  {
+   "attempts": 1,
+   "cls": "GOVERNMENT_ORDERED",
+   "country": "Bangladesh",
+   "dark_h": [
+    24,
+    24,
+    12,
+    0,
+    0,
+    0,
+    0
+   ],
+   "digest": "f474cbaffb557acef440aeafba814498e60f1192fc9e2ce605c1aa775751799b",
+   "entity": "country/BD",
+   "evidence": [
+    {
+     "domain": "reuters.com",
+     "title": "Bangladesh's internet shutdown isolates citizens, disrupts business"
+    },
+    {
+     "domain": "aljazeera.com",
+     "title": "Bangladesh restores mobile internet after 11-day blackout to quell protests"
+    },
+    {
+     "domain": "jurist.org",
+     "title": "Bangladesh authorities announce end to 11-day Internet shutdown"
+    },
+    {
+     "domain": "techpolicy.press",
+     "title": "How Bangladesh Fell Into An Information Blackout"
+    },
+    {
+     "domain": "thehill.com",
+     "title": "Bangladesh ends 11-day mobile internet blackout after deadly protests"
+    },
+    {
+     "domain": "voanews.com",
+     "title": "Internet still down in Bangladesh despite apparent calm following deadly protests"
+    },
+    {
+     "domain": "amnesty.org",
+     "title": "What is happening at the quota-reform protests in Bangladesh?"
+    },
+    {
+     "domain": "pbs.org",
+     "title": "How Bangladesh's student protests ignited a broader movement against the country's leader"
+    }
+   ],
+   "final": true,
+   "lost": 3,
+   "mask": 7,
+   "n_src": 25,
+   "observed_at": 1792303303,
+   "policies": 0,
+   "replay": false,
+   "settled": 0,
+   "week_start": 1721606400,
+   "why": "Multiple headlines report internet shutdowns imposed during protests, with authorities announcing the end, indicating government enforcement."
+  },
+  {
+   "attempts": 1,
+   "cls": "NO_SHUTDOWN_SIGNAL",
+   "country": "Bangladesh",
+   "dark_h": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "digest": "",
+   "entity": "country/BD",
+   "evidence": [],
+   "final": true,
+   "lost": 0,
+   "mask": 0,
+   "n_src": 0,
+   "observed_at": 1792303164,
+   "policies": 0,
+   "replay": false,
+   "settled": 0,
+   "week_start": 1719792000,
+   "why": ""
+  },
+  {
+   "attempts": 1,
+   "cls": "NON_GOVERNMENT_CAUSE",
+   "country": "Ghana",
+   "dark_h": [
+    0,
+    0,
+    0,
+    13,
+    24,
+    24,
+    24
+   ],
+   "digest": "d3d0ec6b8d7b545febe0ee798f8debf38950f93253731f0dd141a3ad45d8e120",
+   "entity": "country/GH",
+   "evidence": [
+    {
+     "domain": "bbc.com",
+     "title": "South Africa, Nigeria, Ghana, Liberia and Ivory Coast hit by major internet outages"
+    },
+    {
+     "domain": "theguardian.com",
+     "title": "Much of west and central Africa without internet after undersea cable failures"
+    },
+    {
+     "domain": "africa.businessinsider.com",
+     "title": "MTN takes proactive steps to restore internet services in Ghana"
+    },
+    {
+     "domain": "indiatoday.in",
+     "title": "Major internet outage hits West and Central Africa due to multiple subsea cable failures"
+    },
+    {
+     "domain": "modernghana.com",
+     "title": "Facebook, WhatsApp, other Meta apps still active amidst internet outages"
+    },
+    {
+     "domain": "techcabal.com",
+     "title": "Three charts that explain the internet outage across Africa"
+    },
+    {
+     "domain": "channelstv.com",
+     "title": "Internet Disruption: Submarine Cable Repair May Take Two Weeks, Says MainOne"
+    },
+    {
+     "domain": "graphic.com.gh",
+     "title": "Sam George blames NCA over internet blackout"
+    }
+   ],
+   "final": true,
+   "lost": 4,
+   "mask": 120,
+   "n_src": 15,
+   "observed_at": 1792303139,
+   "policies": 1,
+   "replay": true,
+   "settled": 1,
+   "week_start": 1710115200,
+   "why": "Headlines repeatedly attribute the outage to undersea/submarine cable failures and repair efforts across West/Central Africa. No headline credibly reports a government order or state-imposed blocking in Ghana."
+  },
+  {
+   "attempts": 1,
+   "cls": "GOVERNMENT_ORDERED",
+   "country": "Bangladesh",
+   "dark_h": [
+    0,
+    0,
+    0,
+    3,
+    24,
+    24,
+    24
+   ],
+   "digest": "85918a82e0b3d877dbb337072c75619643d3afd1da3d8f6b7af9af1d109b6ef7",
+   "entity": "country/BD",
+   "evidence": [
+    {
+     "domain": "reuters.com",
+     "title": "Bangladesh's internet shutdown isolates citizens, disrupts business"
+    },
+    {
+     "domain": "aljazeera.com",
+     "title": "Bangladesh restores mobile internet after 11-day blackout to quell protests"
+    },
+    {
+     "domain": "france24.com",
+     "title": "Bangladesh wakes to TV, internet blackout as deadly protests spike"
+    },
+    {
+     "domain": "apnews.com",
+     "title": "Bangladesh imposes nationwide curfew as deadly protests over government jobs escalate"
+    },
+    {
+     "domain": "jurist.org",
+     "title": "Bangladesh authorities announce end to 11-day Internet shutdown"
+    },
+    {
+     "domain": "techpolicy.press",
+     "title": "How Bangladesh Fell Into An Information Blackout"
+    },
+    {
+     "domain": "bloomberg.com",
+     "title": "Bangladesh Internet Goes Dark as Widening Protests Kill 39"
+    },
+    {
+     "domain": "restofworld.org",
+     "title": "Bangladesh\u2019s internet blackout immobilizes its booming tech industry"
+    }
+   ],
+   "final": true,
+   "lost": 3,
+   "mask": 112,
+   "n_src": 25,
+   "observed_at": 1792303092,
+   "policies": 1,
+   "replay": true,
+   "settled": 1,
+   "week_start": 1721001600,
+   "why": "Headlines describe govt-imposed blackout/curfew to quell protests, with authorities announcing its end after 11 days."
+  }
+ ],
+ "pool": {
+  "free": "52660000000000000000",
+  "lps": 1,
+  "observations": 4,
+  "policies": 3,
+  "pool": "57660000000000000000",
+  "reserved": "5000000000000000000",
+  "share_price_wei_e18": "961000000000000000",
+  "total_shares": "60000000000000000000"
+ },
+ "policies": [
+  {
+   "beneficiary": "0x8fb5c97a1a90675caec56a12e1f20cebf7b68be7",
+   "bought_at": 1792303073,
+   "cap_days": 5,
+   "cover": "5000000000000000000",
+   "daily": "1000000000000000000",
+   "entity": "country/BD",
+   "holder": "0xe258d2604aec1321ddd58f179001cc6a8c442930",
+   "paid": "3000000000000000000",
+   "pid": "p1",
+   "premium": "200000000000000000",
+   "replay": true,
+   "status": "PAID",
+   "week_start": 1721001600
+  },
+  {
+   "beneficiary": "0xe258d2604aec1321ddd58f179001cc6a8c442930",
+   "bought_at": 1792303082,
+   "cap_days": 5,
+   "cover": "5000000000000000000",
+   "daily": "1000000000000000000",
+   "entity": "country/GH",
+   "holder": "0xe258d2604aec1321ddd58f179001cc6a8c442930",
+   "paid": "0",
+   "pid": "p2",
+   "premium": "200000000000000000",
+   "replay": true,
+   "status": "EXPIRED",
+   "week_start": 1710115200
+  },
+  {
+   "beneficiary": "0xe258d2604aec1321ddd58f179001cc6a8c442930",
+   "bought_at": 1792303339,
+   "cap_days": 5,
+   "cover": "5000000000000000000",
+   "daily": "1000000000000000000",
+   "entity": "country/BD",
+   "holder": "0xe258d2604aec1321ddd58f179001cc6a8c442930",
+   "paid": "0",
+   "pid": "p3",
+   "premium": "260000000000000000",
+   "replay": false,
+   "status": "ACTIVE",
+   "week_start": 1792972800
+  }
+ ],
+ "accounting": {
+  "active_cover": "5000000000000000000",
+  "balance": "57660000000000000000",
+  "claimable_total": "0",
+  "conserved": true,
+  "pool": "57660000000000000000",
+  "reserved": "5000000000000000000",
+  "share_sum": "60000000000000000000",
+  "total_shares": "60000000000000000000"
+ }
+}
