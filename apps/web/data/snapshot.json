@@ -1,6 +1,6 @@
 {
  "contract": "0x06366C26dD74463B343170ABA47f0dc27c223a6A",
- "as_of": "2026-10-18T06:11:12Z",
+ "as_of": "2026-10-18T06:19:55Z",
  "config": {
   "baseline_percentile": 75,
   "dark_pct": 50,
@@ -293,13 +293,13 @@
   }
  ],
  "pool": {
-  "free": "52660000000000000000",
+  "free": "47920000000000000000",
   "lps": 1,
   "observations": 4,
-  "policies": 3,
-  "pool": "57660000000000000000",
-  "reserved": "5000000000000000000",
-  "share_price_wei_e18": "961000000000000000",
+  "policies": 4,
+  "pool": "57920000000000000000",
+  "reserved": "10000000000000000000",
+  "share_price_wei_e18": "965333333333333333",
   "total_shares": "60000000000000000000"
  },
  "policies": [
@@ -347,15 +347,30 @@
    "replay": false,
    "status": "ACTIVE",
    "week_start": 1792972800
+  },
+  {
+   "beneficiary": "0x144902267df35e7ac5e096a5659a5243ea9bb441",
+   "bought_at": 1792304076,
+   "cap_days": 5,
+   "cover": "5000000000000000000",
+   "daily": "1000000000000000000",
+   "entity": "country/BD",
+   "holder": "0x144902267df35e7ac5e096a5659a5243ea9bb441",
+   "paid": "0",
+   "pid": "p4",
+   "premium": "260000000000000000",
+   "replay": false,
+   "status": "ACTIVE",
+   "week_start": 1793577600
   }
  ],
  "accounting": {
-  "active_cover": "5000000000000000000",
-  "balance": "57660000000000000000",
+  "active_cover": "10000000000000000000",
+  "balance": "57920000000000000000",
   "claimable_total": "0",
   "conserved": true,
-  "pool": "57660000000000000000",
-  "reserved": "5000000000000000000",
+  "pool": "57920000000000000000",
+  "reserved": "10000000000000000000",
   "share_sum": "60000000000000000000",
   "total_shares": "60000000000000000000"
  }

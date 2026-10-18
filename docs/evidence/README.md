@@ -34,9 +34,9 @@ confirms they are in step.
   answers recorded in `tests/fixtures/`, so the on-chain measurement is reproducible offline.
 - `get_accounting` reports `conserved: true` after the run.
 
-All transactions were signed by the maintainer's testnet account
-`0xE258D2604AEC1321ddD58f179001cc6A8c442930`, except policy p4, bought from the website with its
-built-in test wallet.
+The 24 logged transactions were signed by the maintainer's testnet account
+`0xE258D2604AEC1321ddD58f179001cc6A8c442930`. Policy p4 in `readbacks.md` was bought from the
+website by a fresh test-wallet address, through the same `buy_cover`.
 
 ## Limits of the network
 
