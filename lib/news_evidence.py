@@ -2,8 +2,9 @@
 
 Validators each fetch the news themselves, keep only headlines from outlets on OUTLETS (checked
 in code, before any model sees them), clean them, and ask their model one question: was this
-shutdown ordered by the authorities? The answer is one of three classes, compared with an
-asymmetric rule (agree) so that a leader can defer a payout but never invent or block one.
+shutdown ordered by the authorities? The answer is one of three classes, and validators must
+reproduce the leader's class exactly (agree): no class, UNATTRIBUTED included, is taken on the
+leader's word.
 
 No caller-supplied text reaches the prompt: the query is built from the entity's on-chain terms,
 and only headline text from allowlisted outlets is used, capped and fenced.
@@ -189,8 +190,8 @@ def normalise_class(answer) -> str:
 
 
 def agree(leader: str, mine: str) -> bool:
-    """Asymmetric agreement on the attribution class. Equal classes agree. A leader's UNATTRIBUTED
-    also stands when this validator saw a non-government cause: both mean no payout now, and
-    UNATTRIBUTED is re-observed later. Nothing else agrees, so a leader can never upgrade a case to
-    a payout nor downgrade a government-ordered one."""
-    return leader == mine or (leader == UNATTR and mine == NONGOV)
+    """Agreement on the attribution class: exact. Each class has its own material outcome
+    (GOVERNMENT_ORDERED pays and is final, NON_GOVERNMENT_CAUSE is final without payout,
+    UNATTRIBUTED is observed again later), so a validator accepts a class only when its own
+    reading of its own fetch reaches the same one."""
+    return leader == mine

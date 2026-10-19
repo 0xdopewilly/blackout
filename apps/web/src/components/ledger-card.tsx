@@ -27,7 +27,7 @@ export function LedgerCard({ obs }: { obs: Observation }) {
       <div className="card-foot">
         <span>
           {obs.lost} lost day{obs.lost === 1 ? "" : "s"}
-          {obs.n_src ? ` · ${obs.n_src} headlines read` : " · no model call"}
+          {obs.cls === "NO_SHUTDOWN_SIGNAL" ? " · no model call" : " · judged from the news"}
         </span>
         <span className="badges">
           {obs.replay && <span className="badge replay">Replay</span>}

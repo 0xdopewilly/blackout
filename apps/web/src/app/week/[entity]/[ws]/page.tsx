@@ -6,6 +6,7 @@ import { DayStrip, SignalChart } from "@/components/signal-chart";
 import { EXPLORER } from "@/lib/config";
 import { loadBook, txsFor } from "@/lib/data";
 import { DAYS, FLAGS, VERDICT, day, gen, short, weekLabel } from "@/lib/format";
+import { loadHeadlines } from "@/lib/news";
 import { loadSignal } from "@/lib/signal";
 
 export const revalidate = 30;
@@ -25,7 +26,10 @@ export default async function WeekPage({ params }: { params: Promise<Params> }) 
   const obs = book.ledger.find((o) => o.entity === entity && o.week_start === ws);
   const terms = book.terms.find((t) => t.entity === entity);
   if (!obs || !terms) notFound();
-  const signal = await loadSignal(entity, ws, terms.tz_min);
+  const [signal, headlines] = await Promise.all([
+    loadSignal(entity, ws, terms.tz_min),
+    obs.cls === "NO_SHUTDOWN_SIGNAL" ? Promise.resolve([]) : loadHeadlines(obs.country, ws),
+  ]);
   const policies = book.policies.filter((p) => p.entity === entity && p.week_start === ws);
   const txs = txsFor(entity, ws);
   const verdict = VERDICT[obs.cls];
@@ -76,29 +80,30 @@ export default async function WeekPage({ params }: { params: Promise<Params> }) 
       <div className="grid2">
         <div className="panel">
           <h2>
-            What they read <small>{obs.n_src ? `${obs.n_src} allowlisted headlines; the leader's first ${obs.evidence.length}` : "no model call"}</small>
+            What they read <small>{obs.cls === "NO_SHUTDOWN_SIGNAL" ? "no model call" : "this week's allowlisted headlines"}</small>
           </h2>
-          {obs.evidence.length ? (
-            <ul className="headlines">
-              {obs.evidence.map((h) => (
-                <li key={h.title}>
-                  <span>{h.domain}</span>
-                  {h.title}
-                </li>
-              ))}
-            </ul>
-          ) : (
+          {obs.cls === "NO_SHUTDOWN_SIGNAL" ? (
             <p className="muted" style={{ margin: 0 }}>
-              {obs.cls === "NO_SHUTDOWN_SIGNAL"
-                ? "With no lost day, the contract decides by measurement alone: no news is fetched and no model is asked, so no headline can ever pay a policy on its own."
-                : "No allowlisted outlet reported on this week, so validators could not attribute it."}
+              With no lost day, the contract decides by measurement alone: no news is fetched and no model is asked, so no headline can ever
+              pay a policy on its own.
             </p>
-          )}
-          {obs.why && (
+          ) : headlines.length ? (
             <>
-              <h2 style={{ marginTop: 18 }}>Leader&apos;s note <small>unverified prose, not compared between validators</small></h2>
-              <p className="note">{obs.why}</p>
+              <ul className="headlines">
+                {headlines.map((h) => (
+                  <li key={h.title}>
+                    <span>{h.domain}</span>
+                    {h.title}
+                  </li>
+                ))}
+              </ul>
+              <p className="small faint" style={{ marginBottom: 0 }}>
+                Fetched by this website with the validators&apos; own query and outlet allowlist. Each validator fetched and judged its own copy;
+                the contract stores only the verdict they all reached, never a leader&apos;s headlines or notes.
+              </p>
             </>
+          ) : (
+            <p className="muted" style={{ margin: 0 }}>The headlines could not be loaded right now. The verdict above is the contract&apos;s.</p>
           )}
         </div>
         <div>

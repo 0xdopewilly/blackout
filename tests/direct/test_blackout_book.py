@@ -140,8 +140,9 @@ def test_bangladesh_july_2024_pays_the_beneficiary(direct_vm, book, direct_alice
     assert contract.observe("country/BD", BD_WEEK) == {"cls": "GOVERNMENT_ORDERED", "lost": 3, "final": True, "attempts": 1}
     assert direct_vm.run_validator() is True
     seen = obs(contract, "country/BD", BD_WEEK)
-    assert seen["mask"] == 0b1110000 and seen["dark_h"] == [0, 0, 0, 3, 24, 24, 24] and seen["n_src"] == 25
-    assert seen["evidence"][0]["domain"] and len(seen["evidence"]) == 8 and seen["replay"] is True
+    assert seen["mask"] == 0b1110000 and seen["dark_h"] == [0, 0, 0, 3, 24, 24, 24] and seen["replay"] is True
+    # only reproduced fields are stored: no leader headlines, note or count
+    assert not {"evidence", "why", "n_src", "digest"} & set(seen)
     direct_vm.sender = direct_alice  # anyone settles: the beneficiary files nothing
     assert contract.settle("country/BD", BD_WEEK) == {"paid": 1, "expired": 0, "total": str(3 * DAILY), "remaining": 0}
     books.check()
@@ -180,8 +181,7 @@ def test_a_quiet_week_is_decided_without_any_model(direct_vm, book):
 
 
 def lead(**overrides) -> dict:
-    base = {"mask": 0b1110000, "lost": 3, "dark_h": [0, 0, 0, 3, 24, 24, 24], "cls": "GOVERNMENT_ORDERED",
-            "n_src": 25, "digest": "", "why": "", "evidence": []}
+    base = {"mask": 0b1110000, "lost": 3, "dark_h": [0, 0, 0, 3, 24, 24, 24], "cls": "GOVERNMENT_ORDERED"}
     return dict(base, **overrides)
 
 
@@ -195,9 +195,12 @@ def test_validators_recompute_the_measurement_exactly(direct_vm, book):
     assert direct_vm.run_validator(leader_result=lead(dark_h=[0, 0, 0, 4, 24, 24, 24])) is False
     assert direct_vm.run_validator(leader_result=lead(cls="NO_SHUTDOWN_SIGNAL")) is False  # hiding a real collapse
     assert direct_vm.run_validator(leader_result=lead(cls="MAYBE")) is False
+    # nothing but the reproducible fields may ride on an observation
+    for extra in ({"why": "trust me"}, {"evidence": [{"domain": "reuters.com", "title": "x"}]}, {"n_src": 25}):
+        assert direct_vm.run_validator(leader_result=lead(**extra)) is False
 
 
-def test_a_leader_can_defer_a_payout_but_never_invent_or_block_one(direct_vm, book):
+def test_no_class_is_taken_on_the_leaders_word(direct_vm, book):
     contract, _ = book
     serve(direct_vm, "ioda_BD_2024-07-15.json", "gnews_BD_2024-07-15.xml")
     judge(direct_vm, "GOVERNMENT_ORDERED")
@@ -209,11 +212,22 @@ def test_a_leader_can_defer_a_payout_but_never_invent_or_block_one(direct_vm, bo
     serve(direct_vm, "ioda_BD_2024-07-15.json", "gnews_BD_2024-07-15.xml")
     judge(direct_vm, "NON_GOVERNMENT_CAUSE")
     assert direct_vm.run_validator(leader_result=lead(cls="GOVERNMENT_ORDERED")) is False
-    assert direct_vm.run_validator(leader_result=lead(cls="UNATTRIBUTED")) is True  # deferral stands
+    assert direct_vm.run_validator(leader_result=lead(cls="UNATTRIBUTED")) is False  # a deferral is reproduced too
     assert direct_vm.run_validator(leader_result=lead(cls="NON_GOVERNMENT_CAUSE")) is True
 
 
-def test_a_validator_without_news_only_accepts_a_deferral(direct_vm, book):
+def test_a_validator_whose_model_fails_confirms_nothing(direct_vm, book):
+    contract, _ = book
+    serve(direct_vm, "ioda_BD_2024-07-15.json", "gnews_BD_2024-07-15.xml")
+    judge(direct_vm, "GOVERNMENT_ORDERED")
+    contract.observe("country/BD", BD_WEEK)
+    serve(direct_vm, "ioda_BD_2024-07-15.json", "gnews_BD_2024-07-15.xml")
+    direct_vm.mock_llm(PROMPT_RE, json.dumps(json.dumps({"cls": "PERHAPS"})))
+    for cls in ("GOVERNMENT_ORDERED", "NON_GOVERNMENT_CAUSE", "UNATTRIBUTED"):
+        assert direct_vm.run_validator(leader_result=lead(cls=cls)) is False
+
+
+def test_a_validator_without_news_reproduces_only_unattributed(direct_vm, book):
     contract, _ = book
     serve(direct_vm, "ioda_BD_2024-07-15.json", "gnews_BD_2024-07-15.xml")
     judge(direct_vm, "GOVERNMENT_ORDERED")

@@ -23,10 +23,6 @@ export interface Observation {
   mask: number;
   lost: number;
   dark_h: number[];
-  n_src: number;
-  digest: string;
-  why: string;
-  evidence: Headline[];
   attempts: number;
   observed_at: number;
   final: boolean;

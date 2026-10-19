@@ -169,10 +169,9 @@ def test_model_answers_are_normalised_or_rejected(answer, cls):
     assert N.normalise_class(answer) == cls
 
 
-def test_the_asymmetric_agreement_matrix():
-    table = {(lead, mine): N.agree(lead, mine) for lead in N.CLASSES for mine in N.CLASSES}
-    assert table == {
-        (N.GOV, N.GOV): True, (N.GOV, N.NONGOV): False, (N.GOV, N.UNATTR): False,
-        (N.NONGOV, N.GOV): False, (N.NONGOV, N.NONGOV): True, (N.NONGOV, N.UNATTR): False,
-        (N.UNATTR, N.GOV): False, (N.UNATTR, N.NONGOV): True, (N.UNATTR, N.UNATTR): True,
-    }
+def test_agreement_is_exact_for_every_class():
+    # each class has its own outcome (pays, final without payout, observed again), so no class
+    # stands in for another: UNATTRIBUTED is reproduced like the rest
+    for lead in N.CLASSES:
+        for mine in N.CLASSES:
+            assert N.agree(lead, mine) is (lead == mine), (lead, mine)

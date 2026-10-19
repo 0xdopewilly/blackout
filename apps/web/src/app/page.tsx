@@ -85,8 +85,8 @@ export default async function Home() {
             <div className="step3">
               <span className="n">02 · ATTRIBUTE</span>
               <h3>Then judges who caused it</h3>
-              <p>Each reads that week&apos;s headlines from allowlisted outlets with its own model: government order, other cause, or not enough to say. A leader can defer a payout, never invent one.</p>
-              <span className="tag">asymmetric agreement</span>
+              <p>Each reads that week&apos;s headlines from allowlisted outlets with its own model: government order, other cause, or not enough to say. They must reach the same answer; none is taken on the leader&apos;s word.</p>
+              <span className="tag">exact agreement</span>
             </div>
             <div className="step3">
               <span className="n">03 · SETTLE</span>

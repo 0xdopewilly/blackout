@@ -36,9 +36,11 @@ export default function HowPage() {
         <strong>undecided</strong>.
       </p>
       <p>
-        The answers are compared asymmetrically. Validators must agree on the class, except that a leader may say <em>undecided</em> where a
-        validator saw another cause: both mean no payout now. So a leader can defer a payout but can never invent one, and can never bury a
-        government-ordered shutdown. An undecided week is observed again after six hours, up to three times.
+        Validators must reach exactly the same class. No answer is taken on the leader&apos;s word, <em>undecided</em> included: each class has
+        its own outcome (a payout, a final no, or another look later), so a validator accepts one only when its own reading of its own fetch
+        reaches it. A leader can neither invent a payout nor bury a government-ordered shutdown, and a validator whose model gives no usable
+        answer confirms nothing. An undecided week is observed again after six hours, up to three times. The contract stores the measurement
+        and the class, never a leader&apos;s headlines or notes.
       </p>
 
       <h2>3. Settle: no claim to file</h2>

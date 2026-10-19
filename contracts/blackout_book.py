@@ -13,9 +13,10 @@ cut, a power failure or a quiet week pays nothing. Nobody files a claim.
 Consensus design, one line per decision:
 - measurement: every validator recomputes the lost-day mask from the same historical IODA window
   and must match the leader exactly (lib/outage_signal.py);
-- attribution: every validator fetches the news and asks its own model; classes are compared with
-  an asymmetric rule (lib/news_evidence.py): a leader may defer a payout (UNATTRIBUTED, observed
-  again later) but can never invent one or block a government-ordered verdict;
+- attribution: every validator fetches the news and asks its own model, and must reach exactly
+  the leader's class (lib/news_evidence.py); no class is a safe harbour, UNATTRIBUTED included;
+- only verified data is stored: the observation is the measurement and the class, nothing else,
+  so no leader-supplied headline, note or count is ever persisted;
 - no signal, no model: a week without lost days is settled as NO_SHUTDOWN_SIGNAL with no model
   call, so no headline can ever pay a policy on its own;
 - injection: the news query is built from on-chain terms, only allowlisted outlets' headlines
@@ -31,7 +32,6 @@ whole flow can be shown on real historical shutdowns. Live weeks always follow t
 """
 
 # GENERATED from contracts/src/blackout_book.py by scripts/bundle.py. Do not edit.
-import hashlib
 import json
 import typing
 from dataclasses import dataclass
@@ -115,8 +115,9 @@ def lost_days(payload: dict, week_start: int, tz_seconds: int) -> dict:
 
 Validators each fetch the news themselves, keep only headlines from outlets on OUTLETS (checked
 in code, before any model sees them), clean them, and ask their model one question: was this
-shutdown ordered by the authorities? The answer is one of three classes, compared with an
-asymmetric rule (agree) so that a leader can defer a payout but never invent or block one.
+shutdown ordered by the authorities? The answer is one of three classes, and validators must
+reproduce the leader's class exactly (agree): no class, UNATTRIBUTED included, is taken on the
+leader's word.
 
 No caller-supplied text reaches the prompt: the query is built from the entity's on-chain terms,
 and only headline text from allowlisted outlets is used, capped and fenced.
@@ -302,11 +303,11 @@ def normalise_class(answer) -> str:
 
 
 def agree(leader: str, mine: str) -> bool:
-    """Asymmetric agreement on the attribution class. Equal classes agree. A leader's UNATTRIBUTED
-    also stands when this validator saw a non-government cause: both mean no payout now, and
-    UNATTRIBUTED is re-observed later. Nothing else agrees, so a leader can never upgrade a case to
-    a payout nor downgrade a government-ordered one."""
-    return leader == mine or (leader == UNATTR and mine == NONGOV)
+    """Agreement on the attribution class: exact. Each class has its own material outcome
+    (GOVERNMENT_ORDERED pays and is final, NON_GOVERNMENT_CAUSE is final without payout,
+    UNATTRIBUTED is observed again later), so a validator accepts a class only when its own
+    reading of its own fetch reaches the same one."""
+    return leader == mine
 # ---- end lib/news_evidence.py ----
 
 ERR_EXPECTED = "[EXPECTED]"
@@ -314,7 +315,7 @@ ERR_EXTERNAL = "[EXTERNAL]"
 ERR_TRANSIENT = "[TRANSIENT]"
 ERR_LLM = "[LLM_ERROR]"
 
-CONTRACT_VERSION = "1"
+CONTRACT_VERSION = "2"
 MONDAY = 4 * DAY  # 1970-01-05 00:00 UTC was a Monday
 LEAD_SECONDS = 72 * 3600
 SETTLE_DELAY = 48 * 3600
@@ -327,7 +328,6 @@ HISTORY_STEP_PCT = 5
 HISTORY_MAX_DAYS = 20
 SETTLE_BATCH = 50
 MAX_LIST = 100
-EVIDENCE_KEEP = 8
 ST_ACTIVE, ST_PAID, ST_EXPIRED = "ACTIVE", "PAID", "EXPIRED"
 HEXCHARS = "0123456789abcdef"
 
@@ -467,37 +467,38 @@ def _attribute(country: str, week_start: int, dark_h: list, items: list) -> tupl
     return cls, str(answer.get("rationale", ""))[:240]
 
 
+OBSERVATION_KEYS = {"mask", "lost", "dark_h", "cls"}
+
+
 def _observe_week(ioda: str, news: str, country: str, week_start: int, tz_seconds: int) -> dict:
+    """The observation is exactly what every validator reproduces: the measurement and the class."""
+
     def leader_fn() -> dict:
         m = _measure(ioda, week_start, tz_seconds)
-        base = {"mask": m["mask"], "lost": m["lost"], "dark_h": m["dark_h"]}
+        out = {"mask": m["mask"], "lost": m["lost"], "dark_h": m["dark_h"]}
         if m["lost"] == 0:
-            return dict(base, cls=NOSIG, n_src=0, digest="", why="", evidence=[])
-        items = _headlines(news)
-        cls, why = _attribute(country, week_start, m["dark_h"], items)
-        digest = hashlib.sha256("\n".join(it["domain"] + " " + it["title"] for it in items).encode("utf-8")).hexdigest()
-        return dict(base, cls=cls, n_src=len(items), digest=digest, why=why, evidence=items[:EVIDENCE_KEEP])
+            return dict(out, cls=NOSIG)
+        cls, _ = _attribute(country, week_start, m["dark_h"], _headlines(news))
+        return dict(out, cls=cls)
 
     def validator_fn(leaders_res: typing.Any) -> bool:
         if not isinstance(leaders_res, gl.vm.Return):
             return _same_failure(leaders_res, lambda: _measure(ioda, week_start, tz_seconds))
         lead = leaders_res.calldata
-        if not isinstance(lead, dict) or lead.get("cls") not in (GOV, NONGOV, UNATTR, NOSIG):
-            return False
+        if not isinstance(lead, dict) or set(lead.keys()) != OBSERVATION_KEYS or lead["cls"] not in (GOV, NONGOV, UNATTR, NOSIG):
+            return False  # nothing but the reproducible fields may ride on an observation
         try:
             mine = _measure(ioda, week_start, tz_seconds)
         except gl.vm.UserError:
             return False
-        if (mine["mask"], mine["lost"], mine["dark_h"]) != (lead.get("mask"), lead.get("lost"), lead.get("dark_h")):
+        if (mine["mask"], mine["lost"], mine["dark_h"]) != (lead["mask"], lead["lost"], lead["dark_h"]):
             return False
         if mine["lost"] == 0:
             return lead["cls"] == NOSIG
-        if lead["cls"] == NOSIG:
-            return False
         try:
             my_cls, _ = _attribute(country, week_start, mine["dark_h"], _headlines(news))
         except gl.vm.UserError:
-            my_cls = UNATTR
+            return False  # this validator could not reach any class itself, so it confirms none
         return agree(lead["cls"], my_cls)
 
     return gl.vm.run_nondet(leader_fn, validator_fn)
@@ -555,10 +556,6 @@ class Observation:
     mask: gl.u64
     lost: gl.u64
     dark_h: str
-    n_src: gl.u64
-    digest: str
-    why: str
-    evidence: str
     attempts: gl.u64
     observed_at: gl.u64
     final: bool
@@ -748,8 +745,7 @@ class BlackoutBook(gl.contract.Contract):
             self.ledger.append(key)
         self.observations[key] = Observation(
             entity=entity, week_start=ws, cls=cls, mask=int(result["mask"]), lost=int(result["lost"]),
-            dark_h=_dumps(result["dark_h"]), n_src=int(result["n_src"]), digest=result["digest"], why=result["why"],
-            evidence=_dumps(result["evidence"]), attempts=attempts, observed_at=now, final=final, settled=0,
+            dark_h=_dumps(result["dark_h"]), attempts=attempts, observed_at=now, final=final, settled=0,
         )
         if cls == GOV:
             self.history[entity] = (int(self.history[entity]) if entity in self.history else 0) + int(result["lost"])
@@ -978,7 +974,6 @@ class BlackoutBook(gl.contract.Contract):
         key = _ew(o.entity, int(o.week_start))
         country = self.terms[o.entity].country if o.entity in self.terms else ""
         return {"entity": o.entity, "country": country, "week_start": int(o.week_start), "cls": o.cls, "mask": int(o.mask),
-                "lost": int(o.lost), "dark_h": json.loads(o.dark_h), "n_src": int(o.n_src), "digest": o.digest, "why": o.why,
-                "evidence": json.loads(o.evidence), "attempts": int(o.attempts), "observed_at": int(o.observed_at),
+                "lost": int(o.lost), "dark_h": json.loads(o.dark_h), "attempts": int(o.attempts), "observed_at": int(o.observed_at),
                 "final": bool(o.final), "settled": int(o.settled), "replay": key in self.replays and bool(self.replays[key]),
                 "policies": len([p for p in self.book[key].split(",") if p]) if key in self.book and self.book[key] else 0}
