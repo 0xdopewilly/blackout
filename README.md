@@ -66,17 +66,23 @@ them so the full flow can run on real events; live weeks follow every rule.
   long shutdown), dark = below 50% of baseline, lost day = six or more dark hours in the darker
   series. No floats, no clocks; validators must reproduce the leader's mask bit for bit. Six hours
   excludes Iraq's scheduled one-to-two-hour exam cuts.
-- **Attribution, asymmetric.** [`lib/news_evidence.py`](lib/news_evidence.py): one of
-  `GOVERNMENT_ORDERED`, `NON_GOVERNMENT_CAUSE`, `UNATTRIBUTED`. Validators agree on equal classes, and
-  a leader's `UNATTRIBUTED` also stands against a validator's `NON_GOVERNMENT_CAUSE` (both mean no
-  payout now). Nothing else agrees: a leader can defer a payout but never invent one, and never bury a
-  government-ordered shutdown. `UNATTRIBUTED` is observed again after six hours, up to three times.
+- **Attribution, exact.** [`lib/news_evidence.py`](lib/news_evidence.py): one of
+  `GOVERNMENT_ORDERED`, `NON_GOVERNMENT_CAUSE`, `UNATTRIBUTED`. Every validator fetches the news and
+  asks its own model, and must reach exactly the leader's class. No class is a safe harbour,
+  `UNATTRIBUTED` included: each has its own outcome (a payout, a final no, another look later), so a
+  leader can neither invent a payout, bury a government-ordered shutdown, nor defer one a validator
+  can decide. A validator whose model gives no usable answer confirms nothing. `UNATTRIBUTED` is
+  observed again after six hours, up to three times.
+- **Only reproduced data is stored.** An observation is exactly the lost-day mask, the lost days, the
+  dark hours per day and the class, all of which every validator reproduced; any extra field is
+  refused. No leader headline, note or count is persisted. The website shows the week's headlines
+  from its own fetch with the same query and allowlist, labelled as such.
 - **No signal, no model.** A week with zero lost days is `NO_SHUTDOWN_SIGNAL` without any news fetch
   or model call, so headlines alone can never pay a policy.
 - **Injection.** The news query is built from on-chain terms; no caller text reaches the prompt.
   Only allowlisted outlets' headlines are kept (checked in code), stripped of invisible and control
   characters and of anything that could pose as prompt structure, capped and fenced. The answer is a
-  three-way enum. A validator that cannot read the news can only accept a deferral.
+  three-way enum. A validator that cannot read the news reproduces only `UNATTRIBUTED`.
 
 ## Economics and rules
 
