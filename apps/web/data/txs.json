@@ -1,167 +1,159 @@
 {
- "contract": "0x06366C26dD74463B343170ABA47f0dc27c223a6A",
+ "contract": "0xb89e2dB363CEC3827a9a7dbBd0CCCe7E75Da538a",
  "weeks": {
   "country/BD|1721001600": [
    {
     "label": "replay: Bangladesh, week of 15 Jul 2024",
-    "hash": "0x75334601e4a429a071f5c6350f622a5f0b3762b3358ab96c6d573057a4d60dbe"
+    "hash": "0xffa7e2f47342b66817b46fa6d4b4a0569fb81981c5c5b5f4be8d06b25f1cb90d"
    },
    {
     "label": "cover: Bangladesh replay week, paid to family abroad",
-    "hash": "0x13ef19860df966d33ccb05c762c5c26dd87ae063001394f3eeca27e6c1d4bd14"
+    "hash": "0x9939975ce885b8abee615cbaadee355135c3590cdee01ede36f55d94b9847e96"
    },
    {
     "label": "observe: Bangladesh, week of 15 Jul 2024",
-    "hash": "0x9c34d8f20a6cc97f52664245686109d107d27f34e2608d4c1f49a0e38a832959"
+    "hash": "0xa88c6dc48d096d23ae8675983b7312b39d67849755a9a2f4784d0e1116164dc7"
    },
    {
     "label": "settle: Bangladesh week (no claim filed)",
-    "hash": "0xa3ee5104c206ee00ac65519f629a666b8c9b6b5d9e14ec6cf68072fc24d97ac2"
+    "hash": "0x58e7791a172c7645785f72e9afa735a3e242d5459c4d6fce2e2ecb1fa34b2cbd"
    }
   ],
   "country/GH|1710115200": [
    {
     "label": "replay: Ghana, week of 11 Mar 2024",
-    "hash": "0x044984f6de5f78ff773c868737452066da8cf1599cf814f258b4abf143af4806"
+    "hash": "0x545b14f0943542aea7d681c78f3c3e1c38b0b244223e1f9bb5f2f053b1c7d7b5"
    },
    {
     "label": "cover: Ghana replay week",
-    "hash": "0xb711777677ee431e8046fe23e8bf2a6143ea6b7cd4e717b2dce5adabbab4b7ef"
+    "hash": "0xbaadf1a4a7b78e06e0263110c0747500f2a6edee5fee5815d3116cd10cbc1cd0"
    },
    {
     "label": "observe: Ghana, week of 11 Mar 2024 (subsea cable cuts)",
-    "hash": "0x83b3d35538cc6945d5f19075876fb7972e4c919e3fd33e1ca15c889bd63ae6c9"
+    "hash": "0x076c43aee75d785ad85e666e827be299e88a126fafc9bdad9a43a25c949ce75a"
    },
    {
     "label": "settle: Ghana week",
-    "hash": "0x8a0c5310d398ea383d999142e1d283491e6151cef326c00d9cc345e617d746f7"
+    "hash": "0x42422308c866a404159036efbe6d2490a43ae6025e1954089755e8968c1139e2"
    }
   ],
   "country/BD|1719792000": [
    {
     "label": "observe: Bangladesh, week of 1 Jul 2024 (quiet control week)",
-    "hash": "0x0230c88bea0ac77a394aa2f71341e064a57e123b152b1985eef69c31ab1f47d7"
-   }
-  ],
-  "country/BD|1792368000": [
-   {
-    "label": "live cover refused: week of 19 Oct 2026 starts in under 72 h (refunded)",
-    "hash": "0xace09fe3bfb831a6f5a99ce03228f5c3509bdca538d639778c60b7277c5e5148"
-   }
-  ],
-  "country/BD|1792972800": [
-   {
-    "label": "live cover: Bangladesh, week of 26 Oct 2026",
-    "hash": "0xe668821d64cf2cd63ed3f2b6fb291fe133305e02b93f9945395208dc16978bf9"
-   },
-   {
-    "label": "live cover: Bangladesh, week of 26 Oct 2026 (history-loaded premium)",
-    "hash": "0x2710512a0770f931633910065f2351890ec162bf25f8e5864ccb322771bbad24"
+    "hash": "0x2958057d46f3838afb6cf8f639a8aba1881e68eb59a783bf1a5b41deedf46d23"
    }
   ],
   "country/BD|1721606400": [
    {
     "label": "observe: Bangladesh, week of 22 Jul 2024",
-    "hash": "0x65f41367ba95fb8d4d63d065f806545e0c54fbaffbb1ad8ebec62ebb52d2a226"
+    "hash": "0xadae79d8f150c3e75f3fece7e661372a6f9a1306b6c3292091f215311d181551"
+   }
+  ],
+  "country/BD|1792368000": [
+   {
+    "label": "live cover refused: week of 19 Oct 2026 has already started (refunded)",
+    "hash": "0x3638a5f051deab567a5beba1d3cd94c30f9fc9cdf1c0dba50799bd0fcf1c9029"
+   }
+  ],
+  "country/BD|1792972800": [
+   {
+    "label": "live cover: Bangladesh, week of 26 Oct 2026 (history-loaded premium, +30%)",
+    "hash": "0x085b7a81465d4506e73914014c823dbf5016820830253baaddc42fb7837d84f3"
    }
   ]
  },
  "all": [
   {
    "label": "deploy BlackoutBook (demo mode, 14-day LP notice)",
-   "hash": "0x4128ffdc31a7643668e53fb9dc09ee9e24ffecddb0d324efc176bc92d42128a4"
+   "hash": "0xba96b6b52880af2c4259ecb257de46fa786749c68aa1a775deb13791f22c0f5d"
   },
   {
    "label": "terms Bangladesh",
-   "hash": "0x3b68fe67538081961ff847a5256c4f961da0d0b24c2b09b1c9caae0fc3aa5fdf"
+   "hash": "0x9d19d85900427470a021b4ba3a410725ffa0784fc9e8372b653082f8be12c818"
   },
   {
    "label": "terms Ghana",
-   "hash": "0x1d2bb0c73d4d9a4c819a13f53697460227e389db29c4430abde8261bf903fe28"
+   "hash": "0x9de2af4d41d61ab57a53df9c714b2970ab68ae056fc862855682bbd25eaff64a"
   },
   {
    "label": "fund the pool (60 GEN)",
-   "hash": "0x97486c9ef16337147faef3421ef24cf50dde614322f400652ddc305665a3e545"
+   "hash": "0xfb6493a70295069983ca6ded8474336c18e3e118c9dbaa6e3dbc999afb805f92"
   },
   {
    "label": "replay: Bangladesh, week of 15 Jul 2024",
-   "hash": "0x75334601e4a429a071f5c6350f622a5f0b3762b3358ab96c6d573057a4d60dbe"
+   "hash": "0xffa7e2f47342b66817b46fa6d4b4a0569fb81981c5c5b5f4be8d06b25f1cb90d"
   },
   {
    "label": "replay: Ghana, week of 11 Mar 2024",
-   "hash": "0x044984f6de5f78ff773c868737452066da8cf1599cf814f258b4abf143af4806"
+   "hash": "0x545b14f0943542aea7d681c78f3c3e1c38b0b244223e1f9bb5f2f053b1c7d7b5"
   },
   {
    "label": "cover: Bangladesh replay week, paid to family abroad",
-   "hash": "0x13ef19860df966d33ccb05c762c5c26dd87ae063001394f3eeca27e6c1d4bd14"
+   "hash": "0x9939975ce885b8abee615cbaadee355135c3590cdee01ede36f55d94b9847e96"
   },
   {
    "label": "cover: Ghana replay week",
-   "hash": "0xb711777677ee431e8046fe23e8bf2a6143ea6b7cd4e717b2dce5adabbab4b7ef"
+   "hash": "0xbaadf1a4a7b78e06e0263110c0747500f2a6edee5fee5815d3116cd10cbc1cd0"
   },
   {
    "label": "observe: Bangladesh, week of 15 Jul 2024",
-   "hash": "0x9c34d8f20a6cc97f52664245686109d107d27f34e2608d4c1f49a0e38a832959"
+   "hash": "0xa88c6dc48d096d23ae8675983b7312b39d67849755a9a2f4784d0e1116164dc7"
   },
   {
    "label": "observe: Ghana, week of 11 Mar 2024 (subsea cable cuts)",
-   "hash": "0x83b3d35538cc6945d5f19075876fb7972e4c919e3fd33e1ca15c889bd63ae6c9"
+   "hash": "0x076c43aee75d785ad85e666e827be299e88a126fafc9bdad9a43a25c949ce75a"
   },
   {
    "label": "observe: Bangladesh, week of 1 Jul 2024 (quiet control week)",
-   "hash": "0x0230c88bea0ac77a394aa2f71341e064a57e123b152b1985eef69c31ab1f47d7"
+   "hash": "0x2958057d46f3838afb6cf8f639a8aba1881e68eb59a783bf1a5b41deedf46d23"
   },
   {
    "label": "settle: Bangladesh week (no claim filed)",
-   "hash": "0xa3ee5104c206ee00ac65519f629a666b8c9b6b5d9e14ec6cf68072fc24d97ac2"
+   "hash": "0x58e7791a172c7645785f72e9afa735a3e242d5459c4d6fce2e2ecb1fa34b2cbd"
   },
   {
    "label": "settle: Ghana week",
-   "hash": "0x8a0c5310d398ea383d999142e1d283491e6151cef326c00d9cc345e617d746f7"
+   "hash": "0x42422308c866a404159036efbe6d2490a43ae6025e1954089755e8968c1139e2"
   },
   {
    "label": "deliver: push the payout to the beneficiary",
-   "hash": "0x12511b65420d0965ded20e86ec1a46e32a916f66ac7f986ee3ad51f5874e97b1"
-  },
-  {
-   "label": "terms Pakistan",
-   "hash": "0x8c6e56234805edcc1f12db744b1e6abd69e8f88853664f25441c5b231169d0b0"
-  },
-  {
-   "label": "terms Iran",
-   "hash": "0xca2580502dfecffa94de68f4576c889d633e2b17ae6dd05cbde33f13a20f0452"
-  },
-  {
-   "label": "terms Iraq",
-   "hash": "0xbef18ac019c271e513ecc32984ea41c5382c047090dc7b29ca0f8e66bd4089de"
-  },
-  {
-   "label": "terms Ethiopia",
-   "hash": "0xe3561dda5d8600f9182b1f4a7fdd601e0776ac19fac7f75b5b901594c1480c25"
-  },
-  {
-   "label": "terms Myanmar",
-   "hash": "0xdd58855c7ecd862defe75a8917299b030f91dcb61767ca7f371ff230ecde9b7c"
-  },
-  {
-   "label": "live cover refused: week of 19 Oct 2026 starts in under 72 h (refunded)",
-   "hash": "0xace09fe3bfb831a6f5a99ce03228f5c3509bdca538d639778c60b7277c5e5148"
-  },
-  {
-   "label": "live cover: Bangladesh, week of 26 Oct 2026",
-   "hash": "0xe668821d64cf2cd63ed3f2b6fb291fe133305e02b93f9945395208dc16978bf9"
+   "hash": "0xdfae2f00b9bc8b6749bc321d9441e21db4b159d7829decf094181ce5ed597048"
   },
   {
    "label": "observe: Bangladesh, week of 22 Jul 2024",
-   "hash": "0x65f41367ba95fb8d4d63d065f806545e0c54fbaffbb1ad8ebec62ebb52d2a226"
+   "hash": "0xadae79d8f150c3e75f3fece7e661372a6f9a1306b6c3292091f215311d181551"
   },
   {
-   "label": "live cover: Bangladesh, week of 26 Oct 2026 (history-loaded premium)",
-   "hash": "0x2710512a0770f931633910065f2351890ec162bf25f8e5864ccb322771bbad24"
+   "label": "terms Pakistan",
+   "hash": "0xc546867eb182371757c33c3335cfb1a18b77e8718198692ccba68e9a12be9dad"
   },
   {
-   "label": "refunds: pull the two refused payments back",
-   "hash": "0x2ec457a18c6a70efbb462941858d817d51a45796a933695843caefd0692c0920"
+   "label": "terms Iran",
+   "hash": "0xde8d81466a58961bf193a3f6a220395ff4459e4883d67acb9e51a0004455ad58"
+  },
+  {
+   "label": "terms Iraq",
+   "hash": "0xc4cc84544a18d21be1259e83377734dd20f06ae3caf035fc488f57e702b7e85e"
+  },
+  {
+   "label": "terms Ethiopia",
+   "hash": "0x69bb836ebb12a12433c7f0184c822569976ae7c1f3b3ba1003b81cd4e541d5ce"
+  },
+  {
+   "label": "terms Myanmar",
+   "hash": "0xf871688ed864065a93c110eaa50bc8e8753508ef2617e7771d8aff048de31806"
+  },
+  {
+   "label": "live cover refused: week of 19 Oct 2026 has already started (refunded)",
+   "hash": "0x3638a5f051deab567a5beba1d3cd94c30f9fc9cdf1c0dba50799bd0fcf1c9029"
+  },
+  {
+   "label": "live cover: Bangladesh, week of 26 Oct 2026 (history-loaded premium, +30%)",
+   "hash": "0x085b7a81465d4506e73914014c823dbf5016820830253baaddc42fb7837d84f3"
+  },
+  {
+   "label": "refunds: pull the refused payment back",
+   "hash": "0x06710b54bd89e9e8c9ed6a417db428b956f20f5fefd8dc62a5e9a1e5c2b05fdb"
   }
  ]
 }

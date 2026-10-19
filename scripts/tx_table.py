@@ -22,7 +22,7 @@ from genlayer_read import decode  # noqa: E402
 
 RPC = "https://studio-dev.genlayer.com/api"
 EXPLORER = "https://explorer-studio-dev.genlayer.com"
-CONTRACT = "0x06366C26dD74463B343170ABA47f0dc27c223a6A"
+CONTRACT = "0xb89e2dB363CEC3827a9a7dbBd0CCCe7E75Da538a"  # v2 (v1: 0x06366C26dD74463B343170ABA47f0dc27c223a6A)
 WEEK_METHODS = ("open_replay", "buy_cover", "observe", "settle")
 
 
@@ -68,7 +68,7 @@ def short(value, limit=60) -> str:
 
 def main() -> int:
     lines = [json.loads(line) for line in (ROOT / "docs/evidence/live-run.jsonl").read_text().splitlines() if line.strip()]
-    deploy = "0x4128ffdc31a7643668e53fb9dc09ee9e24ffecddb0d324efc176bc92d42128a4"
+    deploy = "0xba96b6b52880af2c4259ecb257de46fa786749c68aa1a775deb13791f22c0f5d"
     rows, weeks, flat = [], {}, []
     for item in [{"label": "deploy BlackoutBook (demo mode, 14-day LP notice)", "hash": deploy}] + lines:
         tx = rpc("eth_getTransactionByHash", [item["hash"]])

@@ -18,7 +18,7 @@ sys.path.insert(0, str(ROOT / "lib"))
 import genlayer_read  # noqa: E402
 
 RPC = "https://studio-dev.genlayer.com/api"
-CONTRACT = "0x06366C26dD74463B343170ABA47f0dc27c223a6A"
+CONTRACT = "0xb89e2dB363CEC3827a9a7dbBd0CCCe7E75Da538a"  # v2 (v1: 0x06366C26dD74463B343170ABA47f0dc27c223a6A)
 
 
 def view(method: str, *args):
@@ -45,10 +45,10 @@ def main() -> int:
            "Rebuild with `python3 scripts/readback.py`.", "", "## get_accounting", "", "```json", json.dumps(book["accounting"], indent=1), "```", "",
            "`conserved` is the contract's own check: balance == pool + claimable_total, the reserve equals the cover of every",
            "active policy and fits in the pool, and LP shares add up.", "", "## list_ledger", "",
-           "| Country | Week start | Verdict | Lost days | Mask | Dark hours per local day | Headlines | Attempts | Final |", "|---|---|---|---|---|---|---|---|---|"]
+           "| Country | Week start | Verdict | Lost days | Mask | Dark hours per local day | Attempts | Final |", "|---|---|---|---|---|---|---|---|"]
     for o in book["ledger"]:
         week = datetime.fromtimestamp(o["week_start"], timezone.utc).strftime("%Y-%m-%d")
-        out.append(f"| {o['country']} | {week} | {o['cls']} | {o['lost']} | {o['mask']} | {o['dark_h']} | {o['n_src']} | {o['attempts']} | {o['final']} |")
+        out.append(f"| {o['country']} | {week} | {o['cls']} | {o['lost']} | {o['mask']} | {o['dark_h']} | {o['attempts']} | {o['final']} |")
     out += ["", "## list_policies", "", "| Policy | Country | Week start | Beneficiary | Premium | Status | Paid | Replay |", "|---|---|---|---|---|---|---|---|"]
     for p in book["policies"]:
         week = datetime.fromtimestamp(p["week_start"], timezone.utc).strftime("%Y-%m-%d")

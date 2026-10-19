@@ -1,6 +1,6 @@
 {
- "contract": "0x06366C26dD74463B343170ABA47f0dc27c223a6A",
- "as_of": "2026-10-18T06:19:55Z",
+ "contract": "0xb89e2dB363CEC3827a9a7dbBd0CCCe7E75Da538a",
+ "as_of": "2026-10-19T15:48:10Z",
  "config": {
   "baseline_percentile": 75,
   "dark_pct": 50,
@@ -14,7 +14,7 @@
   "reobserve_gap_s": 21600,
   "settle_delay_s": 172800,
   "total_cap_bps": 8000,
-  "version": "1",
+  "version": "2",
   "wallet_cap": 5,
   "withdraw_notice_s": 1209600
  },
@@ -97,52 +97,15 @@
     0,
     0
    ],
-   "digest": "f474cbaffb557acef440aeafba814498e60f1192fc9e2ce605c1aa775751799b",
    "entity": "country/BD",
-   "evidence": [
-    {
-     "domain": "reuters.com",
-     "title": "Bangladesh's internet shutdown isolates citizens, disrupts business"
-    },
-    {
-     "domain": "aljazeera.com",
-     "title": "Bangladesh restores mobile internet after 11-day blackout to quell protests"
-    },
-    {
-     "domain": "jurist.org",
-     "title": "Bangladesh authorities announce end to 11-day Internet shutdown"
-    },
-    {
-     "domain": "techpolicy.press",
-     "title": "How Bangladesh Fell Into An Information Blackout"
-    },
-    {
-     "domain": "thehill.com",
-     "title": "Bangladesh ends 11-day mobile internet blackout after deadly protests"
-    },
-    {
-     "domain": "voanews.com",
-     "title": "Internet still down in Bangladesh despite apparent calm following deadly protests"
-    },
-    {
-     "domain": "amnesty.org",
-     "title": "What is happening at the quota-reform protests in Bangladesh?"
-    },
-    {
-     "domain": "pbs.org",
-     "title": "How Bangladesh's student protests ignited a broader movement against the country's leader"
-    }
-   ],
    "final": true,
    "lost": 3,
    "mask": 7,
-   "n_src": 25,
-   "observed_at": 1792303303,
+   "observed_at": 1792424328,
    "policies": 0,
    "replay": false,
    "settled": 0,
-   "week_start": 1721606400,
-   "why": "Multiple headlines report internet shutdowns imposed during protests, with authorities announcing the end, indicating government enforcement."
+   "week_start": 1721606400
   },
   {
    "attempts": 1,
@@ -157,19 +120,15 @@
     0,
     0
    ],
-   "digest": "",
    "entity": "country/BD",
-   "evidence": [],
    "final": true,
    "lost": 0,
    "mask": 0,
-   "n_src": 0,
-   "observed_at": 1792303164,
+   "observed_at": 1792424258,
    "policies": 0,
    "replay": false,
    "settled": 0,
-   "week_start": 1719792000,
-   "why": ""
+   "week_start": 1719792000
   },
   {
    "attempts": 1,
@@ -184,52 +143,15 @@
     24,
     24
    ],
-   "digest": "d3d0ec6b8d7b545febe0ee798f8debf38950f93253731f0dd141a3ad45d8e120",
    "entity": "country/GH",
-   "evidence": [
-    {
-     "domain": "bbc.com",
-     "title": "South Africa, Nigeria, Ghana, Liberia and Ivory Coast hit by major internet outages"
-    },
-    {
-     "domain": "theguardian.com",
-     "title": "Much of west and central Africa without internet after undersea cable failures"
-    },
-    {
-     "domain": "africa.businessinsider.com",
-     "title": "MTN takes proactive steps to restore internet services in Ghana"
-    },
-    {
-     "domain": "indiatoday.in",
-     "title": "Major internet outage hits West and Central Africa due to multiple subsea cable failures"
-    },
-    {
-     "domain": "modernghana.com",
-     "title": "Facebook, WhatsApp, other Meta apps still active amidst internet outages"
-    },
-    {
-     "domain": "techcabal.com",
-     "title": "Three charts that explain the internet outage across Africa"
-    },
-    {
-     "domain": "channelstv.com",
-     "title": "Internet Disruption: Submarine Cable Repair May Take Two Weeks, Says MainOne"
-    },
-    {
-     "domain": "graphic.com.gh",
-     "title": "Sam George blames NCA over internet blackout"
-    }
-   ],
    "final": true,
    "lost": 4,
    "mask": 120,
-   "n_src": 15,
-   "observed_at": 1792303139,
+   "observed_at": 1792424219,
    "policies": 1,
    "replay": true,
    "settled": 1,
-   "week_start": 1710115200,
-   "why": "Headlines repeatedly attribute the outage to undersea/submarine cable failures and repair efforts across West/Central Africa. No headline credibly reports a government order or state-imposed blocking in Ghana."
+   "week_start": 1710115200
   },
   {
    "attempts": 1,
@@ -244,68 +166,31 @@
     24,
     24
    ],
-   "digest": "85918a82e0b3d877dbb337072c75619643d3afd1da3d8f6b7af9af1d109b6ef7",
    "entity": "country/BD",
-   "evidence": [
-    {
-     "domain": "reuters.com",
-     "title": "Bangladesh's internet shutdown isolates citizens, disrupts business"
-    },
-    {
-     "domain": "aljazeera.com",
-     "title": "Bangladesh restores mobile internet after 11-day blackout to quell protests"
-    },
-    {
-     "domain": "france24.com",
-     "title": "Bangladesh wakes to TV, internet blackout as deadly protests spike"
-    },
-    {
-     "domain": "apnews.com",
-     "title": "Bangladesh imposes nationwide curfew as deadly protests over government jobs escalate"
-    },
-    {
-     "domain": "jurist.org",
-     "title": "Bangladesh authorities announce end to 11-day Internet shutdown"
-    },
-    {
-     "domain": "techpolicy.press",
-     "title": "How Bangladesh Fell Into An Information Blackout"
-    },
-    {
-     "domain": "bloomberg.com",
-     "title": "Bangladesh Internet Goes Dark as Widening Protests Kill 39"
-    },
-    {
-     "domain": "restofworld.org",
-     "title": "Bangladesh\u2019s internet blackout immobilizes its booming tech industry"
-    }
-   ],
    "final": true,
    "lost": 3,
    "mask": 112,
-   "n_src": 25,
-   "observed_at": 1792303092,
+   "observed_at": 1792424196,
    "policies": 1,
    "replay": true,
    "settled": 1,
-   "week_start": 1721001600,
-   "why": "Headlines describe govt-imposed blackout/curfew to quell protests, with authorities announcing its end after 11 days."
+   "week_start": 1721001600
   }
  ],
  "pool": {
-  "free": "47920000000000000000",
+  "free": "52660000000000000000",
   "lps": 1,
   "observations": 4,
-  "policies": 4,
-  "pool": "57920000000000000000",
-  "reserved": "10000000000000000000",
-  "share_price_wei_e18": "965333333333333333",
+  "policies": 3,
+  "pool": "57660000000000000000",
+  "reserved": "5000000000000000000",
+  "share_price_wei_e18": "961000000000000000",
   "total_shares": "60000000000000000000"
  },
  "policies": [
   {
    "beneficiary": "0x8fb5c97a1a90675caec56a12e1f20cebf7b68be7",
-   "bought_at": 1792303073,
+   "bought_at": 1792424167,
    "cap_days": 5,
    "cover": "5000000000000000000",
    "daily": "1000000000000000000",
@@ -320,7 +205,7 @@
   },
   {
    "beneficiary": "0xe258d2604aec1321ddd58f179001cc6a8c442930",
-   "bought_at": 1792303082,
+   "bought_at": 1792424182,
    "cap_days": 5,
    "cover": "5000000000000000000",
    "daily": "1000000000000000000",
@@ -335,7 +220,7 @@
   },
   {
    "beneficiary": "0xe258d2604aec1321ddd58f179001cc6a8c442930",
-   "bought_at": 1792303339,
+   "bought_at": 1792424437,
    "cap_days": 5,
    "cover": "5000000000000000000",
    "daily": "1000000000000000000",
@@ -347,30 +232,15 @@
    "replay": false,
    "status": "ACTIVE",
    "week_start": 1792972800
-  },
-  {
-   "beneficiary": "0x144902267df35e7ac5e096a5659a5243ea9bb441",
-   "bought_at": 1792304076,
-   "cap_days": 5,
-   "cover": "5000000000000000000",
-   "daily": "1000000000000000000",
-   "entity": "country/BD",
-   "holder": "0x144902267df35e7ac5e096a5659a5243ea9bb441",
-   "paid": "0",
-   "pid": "p4",
-   "premium": "260000000000000000",
-   "replay": false,
-   "status": "ACTIVE",
-   "week_start": 1793577600
   }
  ],
  "accounting": {
-  "active_cover": "10000000000000000000",
-  "balance": "57920000000000000000",
+  "active_cover": "5000000000000000000",
+  "balance": "57660000000000000000",
   "claimable_total": "0",
   "conserved": true,
-  "pool": "57920000000000000000",
-  "reserved": "10000000000000000000",
+  "pool": "57660000000000000000",
+  "reserved": "5000000000000000000",
   "share_sum": "60000000000000000000",
   "total_shares": "60000000000000000000"
  }

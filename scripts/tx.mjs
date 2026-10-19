@@ -108,7 +108,7 @@ async function main() {
   );
   const fees = { distribution: estimate.distribution, feeValue: estimate.feeValue };
   const hash = await client.writeContract({ address, functionName: method, args, value, fees });
-  await client.waitForTransactionReceipt({ hash, waitUntil: "decided", interval: 4000, retries: 90 });
+  await client.waitForTransactionReceipt({ hash, waitUntil: "decided", interval: Number(process.env.TX_POLL_MS || 4000), retries: Math.ceil(360000 / Number(process.env.TX_POLL_MS || 4000)) });
   const tx = await client.getTransaction({ hash });
   const ok = ["ACCEPTED", "FINALIZED"].includes(tx.statusName) && tx.txExecutionResultName === "FINISHED_WITH_RETURN";
   const details = await consensusDetails(chains.studioDevnet.rpcUrls.default.http[0], hash).catch(() => ({}));

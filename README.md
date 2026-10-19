@@ -6,7 +6,7 @@ trusted to rule on: did the authorities order it? Government-ordered lost days p
 to anyone the buyer chose. Nobody files a claim.
 
 - Website: https://blackout-cover.vercel.app
-- Contract on GenLayer Studio Next (chain 61997): [`0x06366C26dD74463B343170ABA47f0dc27c223a6A`](https://explorer-studio-dev.genlayer.com/address/0x06366C26dD74463B343170ABA47f0dc27c223a6A)
+- Contract on GenLayer Studio Next (chain 61997): [`0xb89e2dB363CEC3827a9a7dbBd0CCCe7E75Da538a`](https://explorer-studio-dev.genlayer.com/address/0xb89e2dB363CEC3827a9a7dbBd0CCCe7E75Da538a) (v2)
 - Evidence: [docs/evidence/](docs/evidence/README.md), every transaction decoded from the chain
 
 ## The problem
@@ -41,23 +41,26 @@ government that caused it does not control.
 
 ## Live on Studio Next
 
-Deployed from [`contracts/blackout_book.py`](contracts/blackout_book.py) at commit `a896ddd`. The
-deploy transaction stores code with SHA-256 `a25294e70814b942de7a2d8422574d567055be6628c160fd0933194fcb1cd55a`,
-equal to `git show a896ddd:contracts/blackout_book.py | sha256sum`.
+Version 2 (exact agreement on every class; only reproduced data stored, see
+[docs/CONSENSUS.md](docs/CONSENSUS.md)) is deployed from [`contracts/blackout_book.py`](contracts/blackout_book.py)
+at commit `d07b888`. The deploy transaction stores code with SHA-256 `2881ece3967389bc603ee330671d90d7025171f742da5b4c05193078bdf2a7c1`, equal to
+`git show d07b888:contracts/blackout_book.py | sha256sum`.
 
 | Week | Verdict | Lost days | What happened | Transaction |
 |---|---|---|---|---|
-| Bangladesh, 15–21 Jul 2024 | `GOVERNMENT_ORDERED` | 3 (Fri–Sun) | the replay policy paid 3 GEN to a beneficiary abroad, pushed to their wallet by a keeper | [observe](https://explorer-studio-dev.genlayer.com/tx/0x9c34d8f20a6cc97f52664245686109d107d27f34e2608d4c1f49a0e38a832959) · [settle](https://explorer-studio-dev.genlayer.com/tx/0xa3ee5104c206ee00ac65519f629a666b8c9b6b5d9e14ec6cf68072fc24d97ac2) |
-| Bangladesh, 22–28 Jul 2024 | `GOVERNMENT_ORDERED` | 3 (Mon–Wed) | the shutdown's second week | [observe](https://explorer-studio-dev.genlayer.com/tx/0x65f41367ba95fb8d4d63d065f806545e0c54fbaffbb1ad8ebec62ebb52d2a226) |
-| Ghana, 11–17 Mar 2024 | `NON_GOVERNMENT_CAUSE` | 4 (Thu–Sun) | subsea cable cuts: the policy expired, nothing paid | [observe](https://explorer-studio-dev.genlayer.com/tx/0x83b3d35538cc6945d5f19075876fb7972e4c919e3fd33e1ca15c889bd63ae6c9) · [settle](https://explorer-studio-dev.genlayer.com/tx/0x8a0c5310d398ea383d999142e1d283491e6151cef326c00d9cc345e617d746f7) |
-| Bangladesh, 1–7 Jul 2024 | `NO_SHUTDOWN_SIGNAL` | 0 | decided by measurement alone, no news fetched, no model asked | [observe](https://explorer-studio-dev.genlayer.com/tx/0x0230c88bea0ac77a394aa2f71341e064a57e123b152b1985eef69c31ab1f47d7) |
+| Bangladesh, 15–21 Jul 2024 | `GOVERNMENT_ORDERED` | 3 (Fri–Sun) | the replay policy paid 3 GEN to a beneficiary abroad, pushed to their wallet by a keeper | [observe](https://explorer-studio-dev.genlayer.com/tx/0xa88c6dc48d096d23ae8675983b7312b39d67849755a9a2f4784d0e1116164dc7) · [settle](https://explorer-studio-dev.genlayer.com/tx/0x58e7791a172c7645785f72e9afa735a3e242d5459c4d6fce2e2ecb1fa34b2cbd) |
+| Bangladesh, 22–28 Jul 2024 | `GOVERNMENT_ORDERED` | 3 (Mon–Wed) | the shutdown's second week | [observe](https://explorer-studio-dev.genlayer.com/tx/0xadae79d8f150c3e75f3fece7e661372a6f9a1306b6c3292091f215311d181551) |
+| Ghana, 11–17 Mar 2024 | `NON_GOVERNMENT_CAUSE` | 4 (Thu–Sun) | subsea cable cuts: the policy expired, nothing paid | [observe](https://explorer-studio-dev.genlayer.com/tx/0x076c43aee75d785ad85e666e827be299e88a126fafc9bdad9a43a25c949ce75a) · [settle](https://explorer-studio-dev.genlayer.com/tx/0x42422308c866a404159036efbe6d2490a43ae6025e1954089755e8968c1139e2) |
+| Bangladesh, 1–7 Jul 2024 | `NO_SHUTDOWN_SIGNAL` | 0 | decided by measurement alone, no news fetched, no model asked | [observe](https://explorer-studio-dev.genlayer.com/tx/0x2958057d46f3838afb6cf8f639a8aba1881e68eb59a783bf1a5b41deedf46d23) |
 
-Every observation was accepted with three validators agreeing, the first in 24 seconds from submission. The stored dark
-hours per day are identical to the ones the tests compute from recorded IODA answers. The run also
-shows the purchase rules live: a purchase for a week starting in under 72 hours refused and refunded,
-an underpaid one refused once Bangladesh's recorded shutdown days raised its premium by 30%, and live
-cover for the week of 26 Oct 2026. Past weeks are marked *Replay*: the demo deployment's owner opened
-them so the full flow can run on real events; live weeks follow every rule.
+Every observation was accepted with validators reproducing the leader's measurement and class
+exactly. The stored dark hours per day are identical to the ones the tests compute from recorded IODA
+answers. The run also shows the purchase rules live: a purchase for a week that has already started
+refused and refunded, and live cover for the week of 26 Oct 2026 at a premium raised 30% by
+Bangladesh's six recorded government-ordered lost days. Past weeks are marked *Replay*: the demo
+deployment's owner opened them so the full flow can run on real events; live weeks follow every rule.
+Version 1 (`0x06366C26dD74463B343170ABA47f0dc27c223a6A`) stays deployed with its history
+([docs/DEPLOYMENTS.md](docs/DEPLOYMENTS.md)).
 
 ## Consensus design
 
@@ -115,7 +118,7 @@ uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python --prerel
 npm install
 python3 scripts/bundle.py --check                                  # contracts/blackout_book.py is up to date
 GENVM_VERSION=v0.6.0-rc5 .venv/bin/genvm-lint check contracts/blackout_book.py
-GENVM_VERSION=v0.6.0-rc5 .venv/bin/python -m pytest -q             # 46 tests
+GENVM_VERSION=v0.6.0-rc5 .venv/bin/python -m pytest -q             # 47 tests
 scripts/glw deploy contracts/blackout_book.py true 1209600         # demo mode, 14-day LP notice
 cd apps/web && npm install && npm run build                        # the website
 ```

@@ -101,7 +101,7 @@ export default async function Home() {
           <div className="section-head">
             <div>
               <h2>The shutdown ledger</h2>
-              <p>Every week the validators have decided, with the evidence they read. A public record no government can edit.</p>
+              <p>Every week the validators have decided, with the measurement they all reproduced. A public record no government can edit.</p>
             </div>
             <Link className="btn small" href="/cover">Cover an upcoming week</Link>
           </div>
